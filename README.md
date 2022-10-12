@@ -1,3 +1,18 @@
+# demo-blockchain-js
+
+The objective of this project is to show how can we interact with a Ethereum blockchain using nothing but JavaScript. The interfaces are built using React and some libs related to blockchain operations and concepts as [web3](https://web3js.readthedocs.io/) and [Metamask API](https://docs.metamask.io/).
+
+## Project goals
+
+- [x] log in with account
+- [ ] create account
+- [ ] list accounts
+- [ ] list balance
+- [ ] transfer funds
+- [ ] interact with contract
+
+Now the `create react app` stuff...
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
