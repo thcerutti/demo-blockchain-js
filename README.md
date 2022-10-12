@@ -5,9 +5,8 @@ The objective of this project is to show how can we interact with a Ethereum blo
 ## Project goals
 
 - [x] log in with account
+- [x] list balance
 - [ ] create account
-- [ ] list accounts
-- [ ] list balance
 - [ ] transfer funds
 - [ ] interact with contract
 
