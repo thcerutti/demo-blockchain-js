@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import detectEthereumProvider from "@metamask/detect-provider";
+import Button from "react-bootstrap/Button";
+import { AccountInfo } from "../atoms/AccountInfo";
 
 export const ConnectToMetamask = () => {
   const [currentAccount, setCurrentAccount] = useState([]);
@@ -14,9 +16,9 @@ export const ConnectToMetamask = () => {
 
   detectEthereumProvider().then((provider) => {
     if (provider && provider.isMetaMask) {
-      provider.on('accountsChanged', setCurrentAccount);
+      provider.on("accountsChanged", setCurrentAccount);
     } else {
-      console.log('Please install MetaMask!');
+      console.log("Please install MetaMask!");
     }
   });
 
@@ -25,17 +27,16 @@ export const ConnectToMetamask = () => {
     if (isConnected) {
       setCurrentAccount(accounts[0]);
     }
-    console.log("accounts: ", accounts);
-    console.log("currentAccount: ", currentAccount);
-    console.log("isConnected: ", isConnected);
   });
 
   return (
     <>
       {!isConnected ? (
-        <button onClick={() => connect()}>Connect to metamask</button>
+        <Button onClick={() => connect()}>Connect to metamask</Button>
       ) : (
-        <span>Connected account: {currentAccount}</span>
+        <div>
+          <AccountInfo accountId={currentAccount}/>
+        </div>
       )}
     </>
   );
