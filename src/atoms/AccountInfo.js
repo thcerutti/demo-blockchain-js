@@ -3,7 +3,7 @@ import Card from "react-bootstrap/Card";
 const Web3 = require("web3");
 
 export const AccountInfo = ({ accountId }) => {
-  const [balance, setBalance] = useState('');
+  const [balance, setBalance] = useState("");
   const web3 = new Web3(Web3.givenProvider);
 
   const getAccountBalance = (accountId) => {
@@ -11,16 +11,19 @@ export const AccountInfo = ({ accountId }) => {
       setBalance(balance.toString());
     });
   };
+
   getAccountBalance(accountId);
+
   return (
-    <Card body>
-      <p>
-        <strong>Connected Account: </strong> {accountId}
-      </p>
-      <p>
-        <strong>Balance: </strong>
-        {web3.utils.fromWei(balance, 'ether')} ETH
-      </p>
+    <Card>
+      <Card.Header>Account details</Card.Header>
+      <Card.Body>
+        <Card.Title>Connected Account</Card.Title>
+        <Card.Text>{accountId}</Card.Text>
+
+        <Card.Title>Account Balance</Card.Title>
+        <Card.Text>{web3.utils.fromWei(balance, "ether")} ETH</Card.Text>
+      </Card.Body>
     </Card>
   );
 };
