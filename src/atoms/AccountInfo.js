@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Card from "react-bootstrap/Card";
 const Web3 = require("web3");
 
@@ -7,12 +7,16 @@ export const AccountInfo = ({ accountId }) => {
   const web3 = new Web3(Web3.givenProvider);
 
   const getAccountBalance = (accountId) => {
+    if (!accountId) return;
+
     web3.eth.getBalance(accountId, (_, balance) => {
       setBalance(balance.toString());
     });
   };
 
-  getAccountBalance(accountId);
+  useEffect(() => {
+    getAccountBalance(accountId);
+  })
 
   return (
     <Card>

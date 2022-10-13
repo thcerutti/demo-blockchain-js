@@ -1,44 +1,38 @@
-import React, { useState } from "react";
-import detectEthereumProvider from "@metamask/detect-provider";
+import React, { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import { AccountInfo } from "../atoms/AccountInfo";
 
 export const ConnectToMetamask = () => {
-  const [currentAccount, setCurrentAccount] = useState([]);
+  const [currentAccount, setCurrentAccount] = useState();
   const [isConnected, setIsConnected] = useState(false);
-  const [isMetamaskPresent, setIsMetamaskPresent] = useState(false);
 
   const connect = async () => {
-    window.ethereum
-      .request({ method: "eth_requestAccounts" })
-      .then(setCurrentAccount)
-      .catch(console.log);
+    let account = await window.ethereum.request({
+      method: "eth_requestAccounts",
+    });
+    setCurrentAccount(account[0]);
+    setIsConnected(true);
   };
 
-  detectEthereumProvider({ silent: true }).then((provider) => {
-    if (provider && provider.isMetaMask) {
-      provider.on("accountsChanged", setCurrentAccount);
-      setIsMetamaskPresent(true);
-    }
-  });
+  useEffect(() => {
+    setCurrentAccount(window.ethereum?.selectedAddress);
+    console.log("useEffect");
+  }, [isConnected]);
 
-  window.ethereum?.request({ method: "eth_accounts" }).then((accounts) => {
-    setIsConnected(accounts.length > 0);
-    if (isConnected) {
-      setCurrentAccount(accounts[0]);
-    }
+  window.ethereum.on("accountsChanged", (accounts) => {
+    console.log("accounts: ", accounts);
+    setIsConnected(window.ethereum?.selectedAddress !== null);
+    setCurrentAccount(accounts[0]);
   });
 
   return (
     <>
-      {!isMetamaskPresent ? (
+      {!window.ethereum?.isMetaMask ? (
         <span>no metamask installed</span>
-      ) : isMetamaskPresent && !isConnected ? (
+      ) : !isConnected ? (
         <Button onClick={() => connect()}>Connect to metamask</Button>
       ) : (
-        <div>
-          <AccountInfo accountId={window.ethereum?.selectedAddress} />
-        </div>
+        <AccountInfo accountId={currentAccount} />
       )}
     </>
   );
