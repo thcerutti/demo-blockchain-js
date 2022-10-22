@@ -22,12 +22,6 @@ export const BlockchainNavbar = ({ children, title, currentAccount }) => {
           <Navbar.Collapse className="justify-content-end">
             <Navbar.Text>
               <AccountInfoNavbar accountId={currentAccount}/>
-              {/* <small>
-                <div>
-                  <strong>Account: </strong>
-                  {getAccountAlias(currentAccount)}
-                </div>
-              </small> */}
             </Navbar.Text>
           </Navbar.Collapse>
         </Container>
