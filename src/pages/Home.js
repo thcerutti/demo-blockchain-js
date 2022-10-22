@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { AccountInfo } from "../atoms/AccountInfo";
+import { AccountDetails } from "../atoms/AccountDetails";
 import { ConnectToMetamask } from "../molecules/ConnectToMetamask";
+import { BlockchainNavbar } from "../molecules/BlockchainNavbar";
+import { PropertyNegotiation } from "../molecules/PropertyNegotiation";
 import { TransferFunds } from "../organisms/TransferFunds";
 
 export const Home = () => {
@@ -14,10 +16,12 @@ export const Home = () => {
 
   return (
     <>
-      <h1>Home</h1>
       <ConnectToMetamask>
-        <AccountInfo accountId={selectedAccount} />
-        <TransferFunds currentAddress={selectedAccount} />
+        <BlockchainNavbar title={"Blockchain Demos"} currentAccount={selectedAccount} >
+          {/* <AccountDetails accountId={selectedAccount} /> */}
+          {/* <TransferFunds currentAddress={selectedAccount} /> */}
+          {/* <PropertyNegotiation /> */}
+        </BlockchainNavbar>
       </ConnectToMetamask>
     </>
   );

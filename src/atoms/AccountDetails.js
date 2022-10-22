@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Card from "react-bootstrap/Card";
 const Web3 = require("web3");
 
-export const AccountInfo = ({ accountId }) => {
+export const AccountDetails = ({ accountId }) => {
   const [balance, setBalance] = useState("");
   const web3 = new Web3(Web3.givenProvider);
 
@@ -21,7 +21,7 @@ export const AccountInfo = ({ accountId }) => {
   return (
     <>
       {accountId && (
-        <Card>
+        <Card style={{ width: "50%" }}>
           <Card.Header>Account details</Card.Header>
           <Card.Body>
             <Card.Title>Connected Account</Card.Title>
