@@ -16,18 +16,22 @@ export const AccountInfo = ({ accountId }) => {
 
   useEffect(() => {
     getAccountBalance(accountId);
-  })
+  });
 
   return (
-    <Card>
-      <Card.Header>Account details</Card.Header>
-      <Card.Body>
-        <Card.Title>Connected Account</Card.Title>
-        <Card.Text>{accountId}</Card.Text>
+    <>
+      {accountId && (
+        <Card>
+          <Card.Header>Account details</Card.Header>
+          <Card.Body>
+            <Card.Title>Connected Account</Card.Title>
+            <Card.Text>{accountId}</Card.Text>
 
-        <Card.Title>Account Balance</Card.Title>
-        <Card.Text>{web3.utils.fromWei(balance, "ether")} ETH</Card.Text>
-      </Card.Body>
-    </Card>
+            <Card.Title>Account Balance</Card.Title>
+            <Card.Text>{web3.utils.fromWei(balance, "ether")} ETH</Card.Text>
+          </Card.Body>
+        </Card>
+      )}
+    </>
   );
 };

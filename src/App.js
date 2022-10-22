@@ -1,11 +1,11 @@
 import { Container } from "react-bootstrap";
 import "./App.css";
-import { ConnectToMetamask } from "./molecules/MetamaskConnection";
+import { Home } from "./pages/Home"
 
 function App() {
   return (
     <Container>
-      <ConnectToMetamask />
+      <Home/>
     </Container>
   );
 }

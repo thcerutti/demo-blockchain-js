@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
-import { AccountInfo } from "../atoms/AccountInfo";
 
-export const ConnectToMetamask = () => {
-  const [currentAccount, setCurrentAccount] = useState();
+export const ConnectToMetamask = ({ children }) => {
+  const [, setCurrentAccount] = useState();
   const [isConnected, setIsConnected] = useState(false);
 
   const connect = async () => {
@@ -15,15 +14,18 @@ export const ConnectToMetamask = () => {
   };
 
   useEffect(() => {
-    setCurrentAccount(window.ethereum?.selectedAddress);
-    console.log("useEffect");
+    setTimeout(() => {
+      setCurrentAccount(window.ethereum?.selectedAddress);
+      setIsConnected(window.ethereum?.selectedAddress !== null);
+    }, 200);
   }, [isConnected]);
 
-  window.ethereum.on("accountsChanged", (accounts) => {
-    console.log("accounts: ", accounts);
-    setIsConnected(window.ethereum?.selectedAddress !== null);
-    setCurrentAccount(accounts[0]);
-  });
+  useEffect(() => {
+    window.ethereum.on("accountsChanged", (accounts) => {
+      setIsConnected(window.ethereum?.selectedAddress !== null);
+      setCurrentAccount(accounts[0]);
+    });
+  }, []);
 
   return (
     <>
@@ -32,7 +34,7 @@ export const ConnectToMetamask = () => {
       ) : !isConnected ? (
         <Button onClick={() => connect()}>Connect to metamask</Button>
       ) : (
-        <AccountInfo accountId={currentAccount} />
+        children
       )}
     </>
   );
