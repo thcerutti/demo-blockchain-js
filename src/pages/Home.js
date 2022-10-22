@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { AccountInfo } from "../atoms/AccountInfo";
 import { ConnectToMetamask } from "../molecules/ConnectToMetamask";
-import { TransferFunds } from "../organisms/TransferFunds";
+import { BlockchainNavbar } from "../molecules/BlockchainNavbar";
 
 export const Home = () => {
   const [selectedAccount, setSelectedAccount] = useState();
@@ -14,10 +13,9 @@ export const Home = () => {
 
   return (
     <>
-      <h1>Home</h1>
       <ConnectToMetamask>
-        <AccountInfo accountId={selectedAccount} />
-        <TransferFunds currentAddress={selectedAccount} />
+        <BlockchainNavbar title={"Blockchain Demos"} currentAccount={selectedAccount} >
+        </BlockchainNavbar>
       </ConnectToMetamask>
     </>
   );

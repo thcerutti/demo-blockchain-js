@@ -24,15 +24,16 @@ export const ConnectToMetamask = ({ children }) => {
     window.ethereum.on("accountsChanged", (accounts) => {
       setIsConnected(window.ethereum?.selectedAddress !== null);
       setCurrentAccount(accounts[0]);
+      console.log("accountsChanged");
     });
   }, []);
 
   return (
     <>
       {!window.ethereum?.isMetaMask ? (
-        <span>no metamask installed</span>
+        <span><a href="https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn">Metamask</a> não instalado</span>
       ) : !isConnected ? (
-        <Button onClick={() => connect()}>Connect to metamask</Button>
+        <Button onClick={() => connect()}>Conectar carteira Ethereum</Button>
       ) : (
         children
       )}
